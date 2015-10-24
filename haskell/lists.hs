@@ -15,14 +15,12 @@ elementAt (x:xs) k
     | otherwise = elementAt xs $ k - 1
 
 -- # 4
-myLength :: [a] -> Int
-myLength [] = 0
-myLength (_:xs) = 1 + myLength xs
+myLength :: ([a] -> Int)
+myLength = foldl (\k _ -> k + 1) 0
 
 -- # 5
-myReverse :: [a] -> [a]
-myReverse [] = []
-myReverse (x:xs) = (myReverse xs) ++ [x]
+myReverse :: ([a] -> [a])
+myReverse = foldl (\l x -> x:l) []
 
 -- # 6
 isPalindrome :: (Eq a) => [a] -> Bool
@@ -77,9 +75,8 @@ encodeDirect xs = foldr encode' [] xs
           encode' x l@((Multiple k x'):xs) = if x == x' then (Multiple (k + 1) x):xs else (Single x):l
 
 -- # 14
-dupli :: [a] -> [a]
-dupli [] = []
-dupli (x:xs) = x:x:dupli xs
+dupli :: ([a] -> [a])
+dupli = foldr (\x l -> x:x:l) []
 
 -- # 15
 repli :: [a] -> Int -> [a]
