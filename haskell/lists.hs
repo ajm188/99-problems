@@ -106,3 +106,11 @@ removeAt :: Int -> [a] -> (a, [a])
 removeAt k xs =
     case foldr (\(x, i) (x', l) -> if i == k then (Just x, l) else (x', x:l)) (Nothing, []) $ zip xs [1..] of
         (Just x', xs') -> (x', xs')
+
+-- # 21
+insertAt :: a -> [a] -> Int -> [a]
+insertAt element list i = foldr (\(x, j) l -> if j == i then element:x:l else x:l) [] $ zip list [1..]
+
+-- # 22
+range :: (Int -> Int -> [Int])
+range = \x y -> [i | i <- [x..y]]
